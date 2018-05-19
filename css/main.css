@@ -1,0 +1,156 @@
+
+body {
+    height:100%;
+    width:100%;
+    padding:0;
+    margin:0;
+    overflow:hidden;
+    background-color:white;
+  }
+  
+  /*#shell {*/
+  /*  width: 100vw;*/
+  /*  height: 100vh;*/
+  /*  margin:-10px;*/
+  /*}*/
+  
+  #qwerightcontainer {
+    width : 100%;
+    height: 100%;
+    /*calc(100vh - 72px);*/
+    /*border: 2px solid black;*/
+    font-family: "Areal", sans-serif;
+    background-color: #333333;
+    position:fixed;
+    top: 0;
+    /*right: -339px;*/
+   
+  }
+  
+  #qwerightrightcontent {
+    width: calc(100vw - 340px);
+    height: 100%;
+    /*calc(100vh - 75px);*/
+    background-color:#333333;
+    position: absolute;
+    top: 10px;
+    left: 325px;
+    padding: 0;
+    margin: 0;
+   
+  }
+  
+  /*#qwetopcontainer {*/
+  /*  width : 100vw;*/
+  /*  height: 76px;*/
+    /*border-bottom: 2px solid black;*/
+  /*  font-family: "Areal", sans-serif;*/
+  /*  background-color: Turquoise;*/
+  /*  position:fixed;*/
+  /*  top: 0;*/
+  /*  right: 0;*/
+  /*  visibility: hidden;*/
+  /*  position:absolute;*/
+    
+  /*}*/
+  
+  #qwerightcontent {
+    width : 300px;
+    height : 100%;
+    /*calc(100vh - 75px);*/
+    margin: 20px;
+    color: red;
+    padding-top:20px;
+  }
+  
+  #codeeditordiv {
+    width : 100%;
+    height : 100%;
+    position: absolute;
+    bottom: -5px;
+    right: -16px;
+  }
+  
+  #editor {
+    width : 100%;
+    height : 95%;
+  }
+  
+  /*#qweKeep {*/
+  /*  position: absolute;*/
+  /*  top: 10px;*/
+  /*  left: 10px;*/
+  /*  width: 18px;*/
+  /*  height: 18px;*/
+  /*  background-color: red;*/
+  /*  border-radius: 3px;*/
+  /*  color:transparent;*/
+  /*  cursor:default;*/
+  /*}*/
+ 
+  #gweStatus {
+   
+   position: absolute;
+   font-size: 75%;
+   top: 26px;
+   left: 20px;
+   width: 295px;
+   height: 15px;
+   background-color: transparent;
+   color:gold;
+   padding-left: 3px;
+   cursor:default;
+   border: 1px solid black;
+   overflow:hidden;
+  }
+ 
+ 
+  
+  #qweshrinkall {
+    /*float:left;*/
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+  
+  #opentopcontent {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  
+  #qwefullright {
+    position:absolute;
+    width : 25px;
+    height : 475px; /*400*/
+    color: blue;
+    top: 1px;
+    left: 310px;
+    cursor:default;
+    z-index:100;
+    font-size:30px;
+  }
+  
+  
+  #gwcDialogueDIV {  /* place to put dialog boxes */
+    width:0;
+    height:0;
+  }
+  
+  
+  
+  #qwesearch { /* not used was for custom search */
+    margin-top: 20px;
+    height: 60px;
+    padding-top: 20px;
+  }
+  
+
+#notesContainer {
+   height : calc(100% - 416px);
+
+}
+
+#notes {
+  width :98%;
+  border: 2px solid black;
+  height: 100%;
+}
