@@ -9,4 +9,4 @@ There seems to always be work that can be done to improve a project. In the main
 
 This project uses the calculator "pluin" that is also hosted on https://github.com/PascalPirate75.
 
-Try the editor, login as guest with password of guest. If abused will not stay up. https://pascalpiratescove.com/editor/.# PPC-Server-Editor
+Try the editor, login as guest with password of guest. If abused will not stay up. https://pascalpiratescove.com/editor/ PPC-Server-Editor
