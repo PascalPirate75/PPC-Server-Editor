@@ -1,4 +1,4 @@
-   function z(s) { 
+function z(s) { 
      // Used to target selectors and replace my use of jquery
      
        t = document.querySelectorAll(s);
@@ -399,8 +399,13 @@ put stuff from clicked tab into editor
     return data.trim();
   }
 
+    var curLoadingDir = false;
+    
+
     function loadDir(d) { 
      // load a directory worth of information into the server map on ACE menue bar
+
+      if (curLoadingDir) {curLoadingDir = true; return false;}
 
       z("#srvD table").innerHTML = "";
       if (curDir.length > baseDir.length) {
@@ -439,11 +444,13 @@ put stuff from clicked tab into editor
             }
           }
         } else {}
+        curLoadingDir = false;
       }
       z("#mapS").title = curDir;
       z("#srvD").style.display = "initial";
 
     }
+    
 
     z("#mapS").addEventListener("mouseover", function(){  
      // If mouse is over server file map then keep open
