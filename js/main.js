@@ -446,6 +446,10 @@ put stuff from clicked tab into editor
         } else {}
         curLoadingDir = false;
       }
+      xhr.onerror = function() {
+        alert("Possible Network Error!");
+        alertOutStatus("Possible Network Error!");
+      }
       z("#mapS").title = curDir;
       z("#srvD").style.display = "initial";
 
@@ -575,6 +579,11 @@ put stuff from clicked tab into editor
             loadDir(curDir);
           }
         }
+        xhr.onerror = function() {
+          alert("Possible Network Error!");
+          alertOutStatus("Possible Network Error!");
+        }
+        
         xhr.open("GET", "php/purge.php?f=" + curDir + "/" + file + "&n=" + cnt, true);
         xhr.send();
 
@@ -727,7 +736,11 @@ put stuff from clicked tab into editor
           } else {
             alertOutStatus("Directory creation failed.");
           }
-        };
+        }
+        xhr.onerror = function() {
+          alert("Possible Network Error!");
+          alertOutStatus("Possible Network Error!");
+        }
      
     }
     
@@ -764,7 +777,11 @@ put stuff from clicked tab into editor
           } else {
             alertOutStatus("File did not load!");
           }
-        };
+        }
+        xhr.onerror = function() {
+          alert("Possible Network Error!");
+          alertOutStatus("Possible Network Error!");
+        }
         
       });
       
@@ -811,7 +828,11 @@ put stuff from clicked tab into editor
            
           }
         }
-      };
+      }
+      xhr.onerror = function() {
+        alert("Possible Network Error!");
+        alertOutStatus("Possible Network Error!");
+      }
 
     }
     
@@ -836,8 +857,12 @@ put stuff from clicked tab into editor
         } else {
           alertOutStatus("Download failed!");
         }
-      };
-      
+      }
+      xhr.onerror = function() {
+        alert("Possible Network Error!");
+        alertOutStatus("Possible Network Error!");
+      }     
+
     };
     
     
@@ -1050,3 +1075,4 @@ window.addEventListener("beforeunload", function(e)  {
  ********************************************************************************************************************
  *******************************************************************************************************************/
   }
+
