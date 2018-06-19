@@ -40,8 +40,6 @@ if ($_SESSION["key"] != $masterkey) {
   exit();
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +52,8 @@ if ($_SESSION["key"] != $masterkey) {
   <meta http-Equiv="Pragma" Content="no-cache" />
   <meta http-Equiv="Expires" Content="0" />
   <title>Pascal Pirate's Server Editor</title>
+
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
 
   <link rel="stylesheet" type="text/css" href="gwcDialogue/gwcDialogue.css">
   <link rel="stylesheet" type="text/css" href="css/aceMenu.css">
@@ -72,7 +72,7 @@ if ($_SESSION["key"] != $masterkey) {
 
 //************************************************************  
 //  
-// Modigy setting in the php/settings.php file to match server
+// Modify setting in the php/settings.php file to match server
 //
 //************************************************************
 
@@ -106,6 +106,32 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
 
 </style>
   
+  <?php
+  
+$browser = strtolower($_SERVER['HTTP_USER_AGENT']);
+
+if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
+ 
+} else if (strpos($browser, "edge")) {
+ 
+} else if (strpos($browser, "chrome")) {
+ echo ('<link rel="stylesheet" type="text/css" href="css/chrome.css" />');
+
+} else if (strpos($browser, "safari")) {
+ 
+} else if (strpos($browser, "firefox")) {
+ 
+} else if (strpos($browser, 'msie') || strpos($browser, 'trident/7')) {
+
+} else {
+ 
+}
+  
+  
+  
+  
+  ?>
+  
 </head>
 <body>
   
@@ -116,14 +142,20 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
     
     <div id="qwerightcontent"> <!-- The content on right hidden side -->
    
-      <div style="margin-bottom:10px; margin-top:15px; width:100%">
-      <input id="helpURL" style="width:77%" type="text" value=""> 
-      <button style="float:right;" id="helpUrlBtn" title="Use this to do quick serches, leave blank and will search for information in hightlighted text from editor.">
-       Help
-      </button>
+      <div id="helpDiv">
+       
+         <div id="helpDivURL">
+           <input id="helpURL" type="text" value=""> 
+         </div>
+         
+         
+         <div id="helpUrlBtn" title="Use this to do quick serches, leave blank and will search for information in hightlighted text from editor.">
+          <img src="assets/help.png">
+         </div>
+         
       </div>
       <!-- Embeded Calulator -->
-      <iframe width="300" height="310" src="<?php echo ($calcURL);?>" scrolling="no" style="border: 1px solid black; font-size:10%;">
+      <iframe width="300" height="310" src="<?php echo ($calcURL);?>" scrolling="no">
       </iframe>                 
      
        <div id="notesContainer">
@@ -138,7 +170,7 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
           <li id="HeamapS" class="dropdown mapS">
             <a href="javascript:void(0)" id="mapS" class="dropbtn">Server</a>
             <div class="dropdown-content">
-              <div id="srvD"><div><table></table></div></div>
+              <div id="srvD"><div><table><tbody></tbody></table></div></div>
             </div>
           </li>
   
@@ -196,11 +228,14 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
           
           <li class="dropdown" style="height:19px">
             <div class="namedFile">
-              <a style="float:left; padding-left:10px; margin-top:3px" class="updownarrow" id="saveA" href="javascript:void(0)" title="Upload file to server.">&#10224;</a>
-              <div style="float:left; padding-left:10px; padding-top:3px" id="Namedfile" title="">/somefile.php</div>
-              <a style="float:left; padding-left:10px; margin-top:3px" class="updownarrow" id="localA" href="javascript:void(0)" title="Download a copy of current file from server.">&#10225;</a>
+              <a class="updownarrow" id="saveA" href="javascript:void(0)" title="Upload file to server.">&#10224;</a>
+              <div id="Namedfile" title="">/somefile.php</div>
+              <a class="updownarrow" id="localA" href="javascript:void(0)" title="Download a copy of current file from server.">&#10225;</a>
               <a id="spellCheck" href="javascript:void(0)" title="Send selected word to Dictionary.com">&#x2713;</a>
-              
+              <a id="logOut" href="index.php" title="Logout and return to login screen." target="_self">
+               <img style="height:14px;" src="assets/logout.png" alt="&#x2672;">
+               
+              </a>
             </div>
           </li>
   
@@ -220,12 +255,24 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
       <div id="codeeditordiv">
         <pre id="editor"></pre> <!-- Targeted editor area -->
       </div>
+
     </div>
   </div>
-
+  <div id="spellCheckerDiv">
+      <h1 id="spellCheckerWarning">Caution: Text formating may be affected.</h1>
+      <div id="spellCheckBody">
+         <textarea id="spellCheckerText"></textarea>
+         <div style="text-align:center">
+           <button id="submitText" title="Replace original text with this.">Use</button>
+           <button id="noSubmitText" title="Don't use this text.">Cancel</button>
+         </div>
+      </div>
+      
+  </div>
   <script>
   
 
   </script>
 </body>
 </html>
+
