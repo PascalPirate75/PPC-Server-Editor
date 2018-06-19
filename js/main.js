@@ -103,7 +103,7 @@ window.onload = function() {
        e.preventDefault();
        z("#loadLocalFile").click();
     });
-               
+             
                
  function handleFileSelect(evt) { // Function that is triggerd then loads the local file into ACE editor
      var file = evt.target.files[0];
@@ -347,7 +347,6 @@ put stuff from clicked tab into editor
    // Handler ACE editor settings, save font size
    /*
    *
-   *
    *  shoud change this and save all settings.
    *
    */
@@ -357,10 +356,33 @@ put stuff from clicked tab into editor
     
   z("#spellCheck").addEventListener("click", function(){  
    //Handler for check icon in ACE editor menu-spellchecker uses highlighted text
-   
-    window.open("http://www.dictionary.com/browse/" + editor.getSelectedText());
+    hStr = editor.getSelectedText();
+    
+    if (hStr.indexOf(" ") > -1) { // if multiple words open textarea for browser handeled spelling correction
+     z("#spellCheckerDiv").style.display = "initial";
+     z("#spellCheckerText").value = hStr.replace(/(\r\n\t|\n|\r\t)/gm,"").replace(/ +/g, ' ').trim();
+     z("#spellCheckerText").focus();
+    }
+    else window.open("http://www.dictionary.com/browse/" + hStr);
   });
   
+  z("#noSubmitText").addEventListener("click", function(){  
+   // button listener for closing spelling textarea
+    z("#spellCheckerDiv").style.display = "none";
+    z("#spellCheckerText").value = "";
+  });
+  
+   z("#submitText").addEventListener("click", function(){  
+    // insert "corected" words in place of checked words
+     tempStr = z("#spellCheckerText").value; 
+     document.execCommand('delete');
+     editor.insert(tempStr);
+     z("#spellCheckerText").value = "";
+     z("#spellCheckerDiv").style.display = "none";
+     editor.focus();
+  });
+  
+
   z("#aceFind").addEventListener("click", function(){ 
    // ACE editor menu Edit / Find same as "Ctrl-f"
    
@@ -407,9 +429,9 @@ put stuff from clicked tab into editor
 
       if (curLoadingDir) {curLoadingDir = true; return false;}
 
-      z("#srvD table").innerHTML = "";
+      z("#srvD table tbody").innerHTML = "";
       if (curDir.length > baseDir.length) {
-        z("#srvD table").insertAdjacentHTML("beforeend", '<tr><td class="preT">PARENT</td></tr>');
+        z("#srvD table tbody").insertAdjacentHTML("beforeend", '<tr><td class="preT">PARENT</td></tr>');
       }
 
       var formData = new FormData();
@@ -433,14 +455,14 @@ put stuff from clicked tab into editor
           x = 0;
           if (items[x] != "NODIRS") {
             while (items[x] != "***") {
-              z("#srvD table").insertAdjacentHTML("beforeend", '<tr><td class="dirT" title="' + curDir + items[x] + '/">' + items[x] + '</td></tr>');
+              z("#srvD table tbody").insertAdjacentHTML("beforeend", '<tr><td class="dirT" title="' + curDir + items[x] + '/">' + items[x] + '</td></tr>');
               x++;
             }
           } else {x++;}
           x++;
           if (x < items.length && items[x] != "NOFILES") {
             for (x = x; x < items.length; x++) {
-              z("#srvD table").insertAdjacentHTML("beforeend", '<tr><td class="fileT" title="' + curDir + items[x] + '">' + items[x] + '</td></tr>');
+              z("#srvD table tbody").insertAdjacentHTML("beforeend", '<tr><td class="fileT" title="' + curDir + items[x] + '">' + items[x] + '</td></tr>');
             }
           }
         } else {}
@@ -501,10 +523,11 @@ put stuff from clicked tab into editor
     });
    
     
-    z("#srvD").addEventListener("click", function(){
+    z("#srvD").addEventListener("click", function(event){
      // lisens for click in server map on the ACE menu and decides what to do
-     
      c = event.target.classList; 
+          // console.log(event.target);
+
      if (c[0] == "fileT"){
       // console.log("File! - " + event.target.textContent);
       fileClicked(event);
@@ -519,7 +542,7 @@ put stuff from clicked tab into editor
       
      }
      event.preventDefault();
-    });
+    }, false);
     
   
       
@@ -528,7 +551,7 @@ put stuff from clicked tab into editor
      
         updatePath(-1);
         loadDir(curDir);
-        injectFileInMenu();
+        // injectFileInMenu();
     }
                                                
     function goIntoSubDir(e) {
@@ -543,7 +566,7 @@ put stuff from clicked tab into editor
        dir = e.target.textContent.trim();
        updatePath(dir);
        loadDir(curDir);
-       injectFileInMenu();
+       // injectFileInMenu();
     }
     
     function SimpleFileDownload(p, f, sizeb, i) {  
@@ -763,17 +786,29 @@ put stuff from clicked tab into editor
           if (xhr.readyState == 4 && xhr.status == 200) {
             data = cleanString(xhr.responseText);
             
-            editor.setValue(data, -1);
-            fileLastSave = editor.getValue();
-            tabbedFiles.LastSaveState[tabbedFiles.tabPointer] = fileLastSave;
-            tabbedFiles.Text[tabbedFiles.tabPointer] = fileLastSave;
-            editor.session.setUndoManager(new ace.UndoManager());
-            tabbedFiles.UR[tabbedFiles.tabPointer] = new ace.UndoManager(); 
+            if (data == "Invalid file type!") {
+              fName = "";
+              alertOutStatus("Invalid file type!");
+              alert("File not opend.  You don not have write access to the server for this file type.");
            
-            editor.clearSelection();
-            setTabTitle2FileName(tabbedFiles.tabPointer);
+            } else {
+            
+              editor.setValue(data, -1);
+              fileLastSave = editor.getValue();
+              tabbedFiles.LastSaveState[tabbedFiles.tabPointer] = fileLastSave;
+              tabbedFiles.Text[tabbedFiles.tabPointer] = fileLastSave;
+              editor.session.setUndoManager(new ace.UndoManager());
+              tabbedFiles.UR[tabbedFiles.tabPointer] = new ace.UndoManager(); 
+             
+              editor.clearSelection();
+              setTabTitle2FileName(tabbedFiles.tabPointer);
+              
+              
+              alertOutStatus("File loaded.");
+              
+            }
+            
             injectFileInMenu();
-            alertOutStatus("File loaded.");
           } else {
             alertOutStatus("File did not load!");
           }
@@ -823,8 +858,14 @@ put stuff from clicked tab into editor
             tabbedFiles.Text[tabbedFiles.tabPointer] = fileLastSave;
             alertOutStatus("File saved.");
           
+          } else if (data == "Invalid file type!") {
+           
+              alertOutStatus("Invalid file type!");
+              alert("File not saved.  You don not have write access to the server for this file type.");
+           
           } else {
-            alertOutStatus("File save failed!");
+           
+              alertOutStatus("File save failed!");
            
           }
         }
@@ -1051,20 +1092,25 @@ z("#save").addEventListener("click", function(){
 //     }
 
 
-function checkAllSaved() {  
+function allSaved() {  
  // Check all tabs for unsaved data.
-
-     for (l = 0; l < 8; l++) {
-
-       if ((fileLastSave != editor.getValue() && (tabbedFiles.tabPointer == l)) || (tabbedFiles.Text[l] != tabbedFiles.LastSaveState[l])) {
-            return true;
+     if (fileLastSave != editor.getValue()) { return false; }
+     else {
+        for (l = 0; l < 8; l++) {
+   
+          if ((tabbedFiles.Text[l] != tabbedFiles.LastSaveState[l])) {
+             return false;
           }
+          
+        }
      }
+     return true;
 }
 
 window.addEventListener("beforeunload", function(e)  {
-    if(checkAllSaved()) return "You have an unsaved file open";
-    else e=null; 
+    if(!allSaved()) {
+     e.returnValue = "Changes you made may not be saved.";
+    }
 });
     
 /********************************************************************************************************************
