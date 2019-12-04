@@ -1,15 +1,10 @@
-div {
-  box-sizing: border-box;
-}
-
-
 body {
     height:100%;
     width:100%;
     padding:0;
     margin:0;
     overflow:hidden;
-    background-color:#333333;
+    background-color:white;
   }
   
  #fileJobHelp {
@@ -50,7 +45,7 @@ body {
   }
   
   #helpDivURL {
-   width:95%; 
+   width:82%; 
    float:left; 
    height:25px
   }
@@ -62,9 +57,8 @@ body {
   }
   
   #helpUrlBtn {
-   float:left; 
+   float:right; 
    cursor:pointer;
-   height: 20px;
   }
   
   iframe {
@@ -126,14 +120,14 @@ body {
    margin-left:10px;
   }
   
-  #qwerEditorPanel {
-    width: calc(100vw - 5px);
+  #qwerightrightcontent {
+    width: calc(100vw - 340px);
     height: 100%;
     /*calc(100vh - 75px);*/
     background-color:#333333;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    left: 325px;
     padding: 0;
     margin: 0;
    
@@ -153,34 +147,26 @@ body {
     
   /*}*/
   
-  #qwerRightPanel {
-    width : 320px;
+  #qwerightcontent {
+    width : 300px;
     height : 100%;
     /*calc(100vh - 75px);*/
-    margin: 11px 11px 11px 0;
+    margin: 20px;
     color: red;
-    padding:11px;
-    position:fixed;
-    background-color:#333;
-    z-index:0;
-    margin-left:0;
-  }
-  
-  #qwerRightPanel:hover {
-    z-index:3000;
+    padding-top:20px;
   }
   
   #codeeditordiv {
     width : 100%;
-    height : calc(100% - 27px);
+    height : 100%;
     position: absolute;
-    bottom: 10px;
+    bottom: -5px;
     right: -16px;
   }
   
   #editor {
-    width : calc(100% - 16px);
-    height : calc(100% + 30px);
+    width : 100%;
+    height : 95%;
   }
   
   /*#qweKeep {*/
@@ -195,17 +181,24 @@ body {
   /*  cursor:default;*/
   /*}*/
  
-  #gwerStatus {
+  #gweStatus {
+   
+   position: absolute;
    font-size: 10px;
    font-weight:700;
+   /*line-height: 10px;*/
+   top: 26px;
+   left: 20px;
    width: 292px;
+   /*height: 15px;*/
    background-color: transparent;
    color:gold;
-   padding: 8px 12px;
+   /*padding: 0;*/
+   /*padding: 6px 0 3px 10px !important;*/
    padding-top:6px;
    cursor:default;
+   /*border: 1px solid black;*/
    overflow:hidden;
-   float:left;
   }
  
  
@@ -249,7 +242,7 @@ body {
   
 
 #notesContainer {
-   height : calc(100% - 393px);
+   height : calc(100% - 438px);
 
 }
 
