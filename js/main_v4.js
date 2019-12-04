@@ -74,9 +74,9 @@ window.onload = function() {
    
     if (t === undefined) t = 4000;
     
-    z("#gwerStatus").innerHTML = ("STATUS : " + m);
+    z("#gweStatus").innerHTML = ("STATUS : " + m);
     setTimeout(function(){
-       z("#gwerStatus").innerHTML = ("STATUS :");
+       z("#gweStatus").innerHTML = ("STATUS :");
     }, t);
   }
    
@@ -262,9 +262,7 @@ put stuff from clicked tab into editor
                "tabPointer" : 0};
   
   fileLastSave = "";
-  
   editor = ace.edit("editor");
-  editor.setOption("scrollPastEnd", 0.25);
   editor.blockScrolling = Infinity; //// ?
   editor.setTheme("ace/theme/terminal");
   editor.session.setMode("ace/mode/html");
@@ -517,7 +515,7 @@ put stuff from clicked tab into editor
          z("#mapS").style.color = "white";
          z(".dropdown-content")[0].style.display = "none";
 
-       }, 500);
+       }, 250);
        
     });
    
@@ -604,7 +602,7 @@ put stuff from clicked tab into editor
       // large files may not finish make timeout longer if bigger files
     }
     
-    var editableFileTypes = ["json", "html", "php", "js", "css", "py", "htmlfrag", "sh", "log", "lst", "txt"];
+    var editableFileTypes = ["dat", "json", "html", "php", "js", "css", "py", "htmlfrag", "sh", "log", "lst", "txt"];
     
     
       var selectedFile = "";
@@ -694,7 +692,7 @@ put stuff from clicked tab into editor
          gwcDialogue("Save file first!", "OK");
 
       } else {
-         z("#gwerStatus").textContent ="STATUS : Loading file..";
+         z("#gweStatus").textContent ="STATUS : Loading file..";
          
          file = file.replace(/(\r\n|\n|\r)/gm,""); // forgot what this is for..
          parts = file.split(".");
@@ -814,7 +812,7 @@ put stuff from clicked tab into editor
     function createDir(m) { 
      // Used to creat a directory in the current directory on server
 
-        z("#gwerStatus").textContent = "STATUS : Creating directory.";
+        z("#gweStatus").textContent = "STATUS : Creating directory.";
         var formData = new FormData();
        
         formData.append('path', curDir)
@@ -846,7 +844,7 @@ put stuff from clicked tab into editor
     function loadfile(m) { 
      // Load a file into ACE from server
       setfilename(m, function(){
-        z("#gwerStatus").textContent = "STATUS : Loading file.";
+        z("#gweStatus").textContent = "STATUS : Loading file.";
         var formData = new FormData();
        
         url_fPath = curUrl;
@@ -902,7 +900,7 @@ put stuff from clicked tab into editor
     function sendFile2Server(saveHereFlag = false) { 
      // Used to save the file in ACE to server
      
-      z("#gwerStatus").textContent = "STATUS : Saving file.";
+      z("#gweStatus").textContent = "STATUS : Saving file.";
       var formData = new FormData();
       
       xhr = new XMLHttpRequest();
@@ -953,7 +951,7 @@ put stuff from clicked tab into editor
     
     function downloadFileFromServer() {  // Saves file in ACE to server then Downloads a 
                                          // copy to the local filesystem
-      z("#gwerStatus").textContent = "STATUS : Downloading file.";
+      z("#gweStatus").textContent = "STATUS : Downloading file.";
       var formData = new FormData();
       xhr = new XMLHttpRequest();
       

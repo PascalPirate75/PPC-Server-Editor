@@ -56,13 +56,14 @@ if ($_SESSION["key"] != $masterkey) {
 <link rel="stylesheet" type="text/css" href="css/normalize.css">
 
   <link rel="stylesheet" type="text/css" href="gwcDialogue/gwcDialogue.css">
-  <link rel="stylesheet" type="text/css" href="css/aceMenu.css">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/aceMenu.css?v=7">
+  <link rel="stylesheet" type="text/css" href="css/main.css?v=17">
 
 
 <!-- Script for ACE editor plugin first 2 if hosted, last 2 if local-->
 
 <script src="https://ajaxorg.github.io/ace-builds/src/ace.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>-->
 <script src="https://ajaxorg.github.io/ace-builds/src/ext-modelist.js" type="text/javascript" charset="utf-8"></script>
 
 <!--<script src="ace/ace.js"></script>-->
@@ -99,7 +100,7 @@ var passWord = "<?php echo ($_SESSION["key"]);?>";
 </script>
 
 <script src="gwcDialogue/gwcDialogue.js" defer></script>
-<script src="js/main.js" defer></script>
+<script src="js/main.js?v=3" defer></script>
 
 <style>
 
@@ -135,12 +136,26 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
 </head>
 <body>
   
-  
-  <div id="qwerightcontainer">  <!-- Right hidden area-->
+  <div id="fileJobHelp">
    
-    <div id="gweStatus">STATUS : </div>
+   File selected : <span id="fileJobHelpFileName"></span>
+   <br>
+   <br>
+   P = Purge keep only latest version
+   <br>
+   D = Delete this file
+   <br>
+   <br>
+   C = Cancel
+   
+  </div>
+  
+  
+  <div id="qwerFullWidthContainer">  <!-- Right hidden area-->
+   
     
-    <div id="qwerightcontent"> <!-- The content on right hidden side -->
+    
+    <div id="qwerRightPanel"> <!-- The content on right hidden side -->
    
       <div id="helpDiv">
        
@@ -149,9 +164,9 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
          </div>
          
          
-         <div id="helpUrlBtn" title="Use this to do quick serches, leave blank and will search for information in hightlighted text from editor.">
-          <img src="assets/help.png">
-         </div>
+         <!--<div id="helpUrlBtn" title="Use this to do quick serches, leave blank and will search for information in hightlighted text from editor.">-->
+         <!-- <img src="assets/help.png">-->
+         <!--</div>-->
          
       </div>
       <!-- Embeded Calulator -->
@@ -164,9 +179,12 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
     </div>
     
     
-    <div id="qwerightrightcontent">
+    <div id="qwerEditorPanel">
      <div id="editormenu">
-
+          <div id="helpUrlBtn" title="Use this to do quick serches, leave blank and will search for information in hightlighted text from editor.">
+            <img height=20 src="assets/help.png">
+          </div>
+          <div id="gwerStatus">STATUS : </div>
           <li id="HeamapS" class="dropdown mapS">
             <a href="javascript:void(0)" id="mapS" class="dropbtn">Server</a>
             <div class="dropdown-content">
@@ -195,6 +213,7 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
               
               <a id="name" href="javascript:void(0)" title="Rename current file.">Rename</a>
               <a id="save" href="javascript:void(0)" title="Save file to server.">Save</a>
+              <a id="saveHere" href="javascript:void(0)" title="Save file to Curent location.">Save Here</a>
               <!--<a id="saveAll" href="javascript:void(0)" title="Save All file to server.">Save All</a>-->
               <a id="local" href="javascript:void(0)" title="Download a copy of current file from server.">Download</a>
               <a id="purge" href="javascript:void(0)" title="Close file.">Close</a>
@@ -255,7 +274,6 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
       <div id="codeeditordiv">
         <pre id="editor"></pre> <!-- Targeted editor area -->
       </div>
-
     </div>
   </div>
   <div id="spellCheckerDiv">
@@ -275,4 +293,3 @@ if (strpos($browser, 'opera') || strpos($browser, 'opr/')) {
   </script>
 </body>
 </html>
-
